@@ -2,11 +2,10 @@ package com.netcracker.edu.kozyrskiy.arch;
 
 import java.io.*;
 import java.util.Enumeration;
-import java.util.StringJoiner;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipException;
+
 
 
 public class ZipArchive implements Archive {
@@ -28,38 +27,21 @@ public class ZipArchive implements Archive {
 
     @Override
     public void addFilesToArchive(final String zipArchiveName, final String... files) throws Exception {
-        makeNewArchiveWithParameters(new Special() {
-            @Override
-            public void doSpecial(ZipOutputStream zos, ZipFile zipArchiveFile, String... args) {
-                zos.setComment(zipArchiveFile.getComment());
-                for (String sFile : files) {
-                    File file = new File(sFile);
-                    if (file.exists())
-                        addElement(file, zos);
-                    else
-                        System.out.println("The file " + file.toString() + " does not exist. Check the correctness of input");
-                }
-            }
-        }, zipArchiveName, files);
+        makeNewArchiveWithParameters(zipArchiveName, files);
     }
 
     @Override
     public void setCommentToArchive(final String zipArchiveName, final String comment) {
-        makeNewArchiveWithParameters(new Special() {
-            @Override
-            public void doSpecial(ZipOutputStream zos, ZipFile zf, String... args) {
-                zos.setComment(args[0]);
-            }
-        }, zipArchiveName, comment);
+        makeNewArchiveWithParameters(zipArchiveName, comment);
     }
 
 
-    //This interface is used in methods where the existing archive has to be updated
-    interface Special{
-        void doSpecial(ZipOutputStream zos, ZipFile zipArchiveFile, final String... args);
-    }
+ //   //This interface is used in methods where the existing archive has to be updated
+ //   interface Special{
+ //       void doSpecial(ZipOutputStream zos, ZipFile zipArchiveFile, final String... args);
+ //   }
 
-    private void makeNewArchiveWithParameters(Special special, final String zipArchiveName, final String... args) throws IllegalArgumentException {
+    private void makeNewArchiveWithParameters(final String zipArchiveName, final String... args) throws IllegalArgumentException {
         try {
             String newArchiveName = "newArchive.zip";
             File zipArchive = new File(zipArchiveName);
@@ -69,8 +51,21 @@ public class ZipArchive implements Archive {
             zos.setLevel(zipLevel);
 
             writeOldFilesIntoNewArchive(zos, zipArchiveFile);
-            special.doSpecial(zos, zipArchiveFile, args);
+
+
+            if (args.length > 1) {
+                UpdateArchive ua = new UpdateArchive(zos, args);
+                ua.update(zipArchiveFile, this);
+            }
+            else {
+                UpdateArchive ua = new UpdateArchive(zos, args[0]);
+                ua.update();
+            }
             close(zos, zipArchiveFile);
+
+
+
+
 
             if(!zipArchive.delete())
                 System.out.println("Old zip archive was not deleted now");
@@ -156,7 +151,7 @@ public class ZipArchive implements Archive {
         }
     }
 
-    private void addElement(File file, ZipOutputStream zos) {
+     void addElement(File file, ZipOutputStream zos) {
         try {
             // Checking whether the file exists
             // without throwing FileNotFoundException when method writeIntoArchive(f, zos) is called
