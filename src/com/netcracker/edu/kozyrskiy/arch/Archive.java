@@ -29,9 +29,8 @@ public interface Archive {
      *
      * @param zipArchiveName Name of the zip archive the {@param comment}  is added to
      * @param comment Comment to add
-     * @throws Exception
      */
-    void setCommentToArchive(String zipArchiveName, String comment) throws Exception;
+    void setCommentToArchive(String zipArchiveName, String comment);
 
     /**
      * Method writes all elements from zip archive into the directory.
@@ -40,9 +39,8 @@ public interface Archive {
      * @param zipArchiveName Name of the zip archive the files are taken from
      * @param directory Name of the directory the files will be written into.
      *                  Created if does not exist
-     * @throws IOException
      */
-    void extractFromZipArchive(String zipArchiveName, String directory) throws IOException;
+    void extractFromZipArchive(String zipArchiveName, String directory);
 
     /**
      * Method writes all elements from the zip archive into the directory named as the zip archive.

@@ -15,9 +15,17 @@ public class AddFilesTest {
         Archive arc = new ZipArchive();
 
         //adding files to the existing archive
-        arc.addFilesToArchive(args[0], args[1], args[2]);
+        try {
+            arc.addFilesToArchive(args[0], args[1], args[2]);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         //adding the file which is already in archive
-        arc.addFilesToArchive(args[0], args[1]);
+        try {
+            arc.addFilesToArchive(args[0], args[1]);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
