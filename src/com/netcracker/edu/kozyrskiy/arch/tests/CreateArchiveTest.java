@@ -23,11 +23,9 @@ public class CreateArchiveTest {
 
             String comment = String.valueOf(args[1]);
             //trying to create a new archive with comment
-            arc.createZipArchiveWithComment(args[0], comment, args[2], args[3], args[4], args[5], args[6]);
+            arc.createZipArchive(args[0], comment, args[2], args[3], args[4], args[5], args[6]);
             System.out.println("The archive with a comment has been created successfully");
 
-        } catch (IOException ioe) {
-            System.out.println("Cannot read file. Exception: " + ioe.toString());
         } catch (Exception e){
             System.out.println("Cannot create archive. Exception: " + e.toString());
         }

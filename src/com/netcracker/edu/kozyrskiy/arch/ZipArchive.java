@@ -2,117 +2,140 @@ package com.netcracker.edu.kozyrskiy.arch;
 
 import java.io.*;
 import java.util.Enumeration;
-import java.util.zip.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
+import java.util.zip.ZipFile;
+
 
 
 public class ZipArchive implements Archive {
+    private final int zipLevel = 5;
 
-    @Override
-    public void createZipArchive(String zipArchiveName, String... fileName) throws Exception {
-        createZipArchive(zipArchiveName, null, fileName);
-    }
-
-    @Override
-    public void createZipArchiveWithComment(String zipArchiveName, String comment, String... fileName) throws Exception {
-        createZipArchive(zipArchiveName, comment, fileName);
-    }
-
-    private void createZipArchive(String zipArchiveName, String comment, String... fileName) throws Exception {
-        ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipArchiveName));
-        zos.setLevel(5);
-        zos.setComment(comment);
-        for (String sFile : fileName) {
-            addElement(new File(sFile), zos);
-        }
-        zos.close();
-    }
-
-    @Override
-    public void addFilesToArchive(String zipArchiveName, String... files) {
+    public void createZipArchive(final String zipArchiveName, final String comment, final String... fileName) {
         try {
-            makeNewArchiveWithParameters(new Special() {
-                @Override
-                public void doSpecial(ZipOutputStream zos, ZipFile zipArchiveFile, String... args) {
-                    zos.setComment(zipArchiveFile.getComment());
-                    for (String sFile: files) {
-                        File file = new File(sFile);
-                        if (file.exists())
-                            addElement(file, zos);
-                        else
-                            System.out.println("The file " + file.toString() + " does not exist. Check the correctness of input");
-                    }
-                }
-            }, zipArchiveName, files);
+            ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipArchiveName));
+            zos.setLevel(zipLevel);
+            zos.setComment(comment);
+            for (String sFile : fileName) {
+                addElement(new File(sFile), zos);
+            }
+            zos.close();
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addFilesToArchive(final String zipArchiveName, final String... files) throws Exception {
+        makeNewArchiveWithParameters(zipArchiveName, files);
+    }
+
+    @Override
+    public void setCommentToArchive(final String zipArchiveName, final String comment) {
+        makeNewArchiveWithParameters(zipArchiveName, comment);
+    }
+
+
+ //   //This interface is used in methods where the existing archive has to be updated
+ //   interface Special{
+ //       void doSpecial(ZipOutputStream zos, ZipFile zipArchiveFile, final String... args);
+ //   }
+
+    private void makeNewArchiveWithParameters(final String zipArchiveName, final String... args) throws IllegalArgumentException {
+        try {
+            String newArchiveName = "newArchive.zip";
+            File zipArchive = new File(zipArchiveName);
+            ZipFile zipArchiveFile = getZipArchiveFile(zipArchive);
+            File newArchive = new File(newArchiveName);
+            ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(newArchive));
+            zos.setLevel(zipLevel);
+
+            writeOldFilesIntoNewArchive(zos, zipArchiveFile);
+
+            UpdateArchive ua = new UpdateArchive(zos, args);
+            if (args.length > 1) {
+                ua.addFiles(zipArchiveFile, this);
+            }
+            else {
+                File test = new File(args[0]);
+                if (test.isFile() || test.isDirectory())
+                    ua.addFiles(zipArchiveFile, this);
+                else
+                    ua.updateComment();
+            }
+            close(zos, zipArchiveFile);
+
+
+            if(!zipArchive.delete())
+                System.out.println("Old zip archive was not deleted now");
+            if(!newArchive.renameTo(zipArchive))
+                System.out.println("Zip archive was not renamed now");
+        } catch (FileNotFoundException fnf){
+            fnf.printStackTrace();
+        }
+    }
+
+    private ZipFile getZipArchiveFile (File zipArchive){
+        try {
+            return new ZipFile(zipArchive);
 
         } catch (IOException ioe){
-            System.out.println("Cannot find archive. Exception: " + ioe.toString());
-        } catch (Exception e){
-            System.out.println("Cannot perform action. Exception: " + e.toString());
+            ioe.printStackTrace();
         }
+        return null;
     }
 
-    @Override
-    public void setCommentToArchive(String zipArchiveName, String comment) {
+    private ZipFile getZipArchiveFile (String zipArchiveName){
         try {
-            makeNewArchiveWithParameters(new Special() {
-                @Override
-                public void doSpecial(ZipOutputStream zos, ZipFile zf, String... args) {
-                    zos.setComment(args[0]);
-                }
-            }, zipArchiveName, comment);
+            return new ZipFile(zipArchiveName);
+
         } catch (IOException ioe){
-            System.out.println("Cannot find archive. Exception: " + ioe.toString());
-        } catch (Exception e){
-            System.out.println("Cannot perform action. Exception: " + e.toString());
+            ioe.printStackTrace();
+        }
+        return null;
+    }
+
+    private void close (ZipOutputStream zos, ZipFile zipArchiveFile){
+        try {
+            zipArchiveFile.close();
+            zos.close();
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+    }
+
+    private void close (ZipFile zipArchiveFile){
+        try{
+            zipArchiveFile.close();
+        } catch (IOException ioe){
+            ioe.printStackTrace();
         }
     }
 
 
-    //This interface is used in methods where the existing archive has to be updated
-    interface Special{
-        void doSpecial(ZipOutputStream zos, ZipFile zipArchiveFile, String... args);
-    }
-
-    private void makeNewArchiveWithParameters(Special special, String zipArchiveName, String... args) throws Exception{
-        File zipArchive = new File(zipArchiveName);
-        ZipFile zipArchiveFile = new ZipFile(zipArchive);
-        File newArchive = new File("newArchive.zip");
-        ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(newArchive));
-        zos.setLevel(5);
-
-        writeOldFilesIntoNewArchive(zipArchiveFile, zos);
-        special.doSpecial(zos, zipArchiveFile, args);
-
-        zipArchiveFile.close();
-        zos.close();
-        zipArchive.delete();
-        newArchive.renameTo(zipArchive);
-    }
-
-
     @Override
-    public void extractFromZipArchive(String zipArchiveName, String directory) throws IOException {
+    public void extractFromZipArchive(final String zipArchiveName, final String directory) {
         File outputDirectory = new File(directory);
         extract(zipArchiveName, outputDirectory);
     }
 
     @Override
-    public void extractFromZipArchive(String zipArchiveName) throws IOException {
+    public void extractFromZipArchive(final String zipArchiveName) {
         File outputDirectory = new File(zipArchiveName.replace(".zip", ""));
         extract(zipArchiveName, outputDirectory);
     }
 
-    private void extract(String zipArchiveName, File outputDirectory) throws IOException{
-        outputDirectory.mkdir();
-        ZipFile zipFile = new ZipFile(zipArchiveName);
+    private void extract(final String zipArchiveName, File outputDirectory) {
+        if (!outputDirectory.mkdir())
+            System.out.println("Output directory was not made now or it had been made earlier");
 
+        ZipFile zipFile = getZipArchiveFile(zipArchiveName);
         extractFromZipFileToDirectory(zipFile, outputDirectory);
-
-        zipFile.close();
+        close(zipFile);
     }
 
     @Override
-    public String readCommentFromArchive(String zipArchiveName) {
+    public String readCommentFromArchive(final String zipArchiveName) {
         try {
             ZipFile zipFile = new ZipFile(zipArchiveName);
             String comment = zipFile.getComment();
@@ -127,12 +150,12 @@ public class ZipArchive implements Archive {
         }
     }
 
-    private void addElement(File file, ZipOutputStream zos) {
+     void addElement(File file, ZipOutputStream zos) {
         try {
             // Checking whether the file exists
             // without throwing FileNotFoundException when method writeIntoArchive(f, zos) is called
             // and not to interrupt adding elements
-            if (file.exists()){
+            if (file.exists()) {
                 //pack directories recursively
                 if (file.isDirectory()) {
                     for (File f : file.listFiles()) {
@@ -141,64 +164,76 @@ public class ZipArchive implements Archive {
                         else
                             writeElementIntoArchive(f, zos);
                     }
-                }
-                else
+                } else
                     writeElementIntoArchive(file, zos);
-            }
-            else {
+            } else {
                 System.out.println("The file " + file.toString() + " does not exist. It was not added to archive");
             }
-
-        } catch (ZipException ze) {
-            System.out.println("The file " + file.toString() + " is already in archive. It will not be added");
-        } catch (IOException ioe){
-            System.out.println(ioe.toString());
+        } catch (NullPointerException npe){
+            npe.printStackTrace();
         }
     }
 
 
-    private void writeElementIntoArchive(File file, ZipOutputStream zos) throws IOException {
-        ZipEntry ze = new ZipEntry(file.getPath());
-        zos.putNextEntry(ze);
-        FileInputStream fis = new FileInputStream(file);
-        writeFromInputToOutput(fis, zos);
-        zos.closeEntry();
-    }
-
-    private void writeOldFilesIntoNewArchive(ZipFile zipArchiveFile, ZipOutputStream zos) throws IOException{
-        Enumeration elements = zipArchiveFile.entries();
-        while (elements.hasMoreElements()){
-            ZipEntry ze = (ZipEntry) elements.nextElement();
+    private void writeElementIntoArchive(File file, ZipOutputStream zos) {
+        try {
+            ZipEntry ze = new ZipEntry(file.getPath());
             zos.putNextEntry(ze);
-            writeFromInputToOutput(zipArchiveFile.getInputStream(ze), zos);
+            FileInputStream fis = new FileInputStream(file);
+            writeFromInputToOutput(fis, zos);
             zos.closeEntry();
+        } catch (IOException ioe){
+            ioe.printStackTrace();
         }
     }
 
-    private void extractFromZipFileToDirectory(ZipFile zipFile, File outputDirectory) throws IOException {
-        Enumeration elements = zipFile.entries();
-        while (elements.hasMoreElements()) {
-            ZipEntry nextEntry = (ZipEntry) elements.nextElement();
-            File nextElement = new File(outputDirectory, nextEntry.getName());
-
-            // to build the hierarchy of directories
-            nextElement.getParentFile().mkdirs();
-
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(nextElement));
-            writeFromInputToOutput(zipFile.getInputStream(nextEntry), bos);
-            bos.close();
+    private void writeOldFilesIntoNewArchive(ZipOutputStream zos, ZipFile zipArchiveFile) {
+        try {
+            Enumeration elements = zipArchiveFile.entries();
+            while (elements.hasMoreElements()) {
+                ZipEntry ze = (ZipEntry) elements.nextElement();
+                zos.putNextEntry(ze);
+                writeFromInputToOutput(zipArchiveFile.getInputStream(ze), zos);
+                zos.closeEntry();
+            }
+        } catch (IOException ioe){
+            ioe.printStackTrace();
         }
     }
 
-    private void writeFromInputToOutput(InputStream inputStream, OutputStream outputStream) throws IOException {
-        byte[] buf = new byte[8000];
-        int length;
-        while (true){
-            length = inputStream.read(buf);
-            if (length < 0)
-                break;
-            outputStream.write(buf, 0, length);
+    private void extractFromZipFileToDirectory(ZipFile zipFile, File outputDirectory) {
+        try {
+            Enumeration elements = zipFile.entries();
+            while (elements.hasMoreElements()) {
+                ZipEntry nextEntry = (ZipEntry) elements.nextElement();
+                File nextElement = new File(outputDirectory, nextEntry.getName());
+
+                // to build the hierarchy of directories
+                if (!nextElement.getParentFile().mkdirs())
+                    System.out.println("Directories weren't made or have been made earlier");
+
+                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(nextElement));
+                writeFromInputToOutput(zipFile.getInputStream(nextEntry), bos);
+                bos.close();
+            }
+        } catch (IOException ioe){
+            ioe.printStackTrace();
         }
-        inputStream.close();
+    }
+
+    private void writeFromInputToOutput(InputStream inputStream, OutputStream outputStream) {
+        try {
+            byte[] buf = new byte[8000];
+            int length;
+            while (true) {
+                length = inputStream.read(buf);
+                if (length < 0)
+                    break;
+                outputStream.write(buf, 0, length);
+            }
+            inputStream.close();
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+        }
     }
 }
