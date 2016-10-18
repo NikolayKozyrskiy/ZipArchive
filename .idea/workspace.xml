@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33e381c8-eb84-4147-9e78-8d0c46cbd8d9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/UpdateArchive.java" afterPath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/UpdateArchive.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/ZipArchive.java" afterPath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/ZipArchive.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/tests/AddFilesTest.java" afterPath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/tests/AddFilesTest.java" />
     </list>
     <ignored path="ZipArchive.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,8 +40,8 @@
       <file leaf-file-name="UpdateArchive.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/UpdateArchive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="240">
+              <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1031#1032#0" expanded="true" />
@@ -742,7 +738,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1476789113053</updated>
-      <workItem from="1476789116242" duration="15943000" />
+      <workItem from="1476789116242" duration="16007000" />
     </task>
     <task id="LOCAL-00001" summary="Some edits were added">
       <created>1476793021337</created>
@@ -765,11 +761,18 @@
       <option name="project" value="LOCAL" />
       <updated>1476800151712</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="final version">
+      <created>1476806724487</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1476806724487</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15943000" />
+    <option name="totallyTimeSpent" value="16007000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -810,7 +813,8 @@
     <MESSAGE value="Some edits were added" />
     <MESSAGE value="All edits except anonymous class added" />
     <MESSAGE value="anonymous class was deleted and UpdateArchive class uploaded" />
-    <option name="LAST_COMMIT_MESSAGE" value="anonymous class was deleted and UpdateArchive class uploaded" />
+    <MESSAGE value="final version" />
+    <option name="LAST_COMMIT_MESSAGE" value="final version" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -929,8 +933,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/UpdateArchive.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state relative-caret-position="240">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1031#1032#0" expanded="true" />
