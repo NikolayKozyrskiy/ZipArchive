@@ -2,25 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33e381c8-eb84-4147-9e78-8d0c46cbd8d9" name="Default" comment="The initial project without edits uploaded">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ZIP_test_dir/test_dir1/test_dir12/rekurs.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ZIP_test_dir/test_dir2/test_dir22/Kot_gav_Gav.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ZIP_test1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ZIP_test2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ZIP_test_dir/qwerty.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ZIP_test_dir/qwerty2.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ZIP_test_dir/test_dir1/sdcdscdscdscds.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ZIP_test_dir/test_dir1/test_dir12/text.rtf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ZIP_test_dir/test_dir2/file_in_dir.rtf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/directoryToAdd/dir/some_text.rtf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fileToAdd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/Archive.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/ZipArchive.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/tests/AddFilesTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/tests/CommentTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/tests/CreateArchiveTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/tests/ExtractTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/zip_dir/dir_in_zip_dir/file_deep.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/zip_dir/fileinzipdir.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/Archive.java" afterPath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/Archive.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/ZipArchive.java" afterPath="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/ZipArchive.java" />
     </list>
     <ignored path="ZipArchive.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,13 +27,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CreateArchiveTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/tests/CreateArchiveTest.java">
+      <file leaf-file-name="Archive.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/Archive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state relative-caret-position="558">
+              <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZipArchive.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/ZipArchive.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1918#1919#0" expanded="true" />
+                <element signature="e#1973#1974#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,6 +63,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -76,12 +77,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/Archive.java" />
-        <option value="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/ZipArchive.java" />
         <option value="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/tests/CreateArchiveTest.java" />
         <option value="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/tests/AddFilesTest.java" />
         <option value="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/tests/CommentTest.java" />
         <option value="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/tests/ExtractTest.java" />
+        <option value="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/UpdateArchive.java" />
+        <option value="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/Archive.java" />
+        <option value="$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/ZipArchive.java" />
       </list>
     </option>
   </component>
@@ -190,6 +192,22 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/ZipArchiver" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="100" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="102" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="106" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="900" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="100" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="102" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="106" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="900" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -661,12 +679,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1476789113053</updated>
-      <workItem from="1476789116242" duration="612000" />
+      <workItem from="1476789116242" duration="3649000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="612000" />
+    <option name="totallyTimeSpent" value="3649000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -679,12 +697,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20355412" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -719,14 +737,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/Archive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1260">
-          <caret line="70" column="1" selection-start-line="70" selection-start-column="1" selection-end-line="70" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -785,22 +795,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/ZipArchive.java">
+    <entry file="file://$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/tests/CreateArchiveTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="36" column="47" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
+        <state relative-caret-position="306">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/tests/CreateArchiveTest.java">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state relative-caret-position="-13760">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/UpdateArchive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/Archive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/netcracker/edu/kozyrskiy/arch/ZipArchive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1918#1919#0" expanded="true" />
+            <element signature="e#1973#1974#0" expanded="true" />
           </folding>
         </state>
       </provider>

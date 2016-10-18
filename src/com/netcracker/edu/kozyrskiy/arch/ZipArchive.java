@@ -2,107 +2,106 @@ package com.netcracker.edu.kozyrskiy.arch;
 
 import java.io.*;
 import java.util.Enumeration;
-import java.util.zip.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipException;
 
 
 public class ZipArchive implements Archive {
+    private final int zipLevel = 5;
+    private final String newArchiveName = "newArchive.zip";
 
-    @Override
-    public void createZipArchive(String zipArchiveName, String... fileName) throws Exception {
-        createZipArchive(zipArchiveName, null, fileName);
-    }
-
-    @Override
-    public void createZipArchiveWithComment(String zipArchiveName, String comment, String... fileName) throws Exception {
-        createZipArchive(zipArchiveName, comment, fileName);
-    }
-
-    private void createZipArchive(String zipArchiveName, String comment, String... fileName) throws Exception {
-        ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipArchiveName));
-        zos.setLevel(5);
-        zos.setComment(comment);
-        for (String sFile : fileName) {
-            addElement(new File(sFile), zos);
-        }
-        zos.close();
-    }
-
-    @Override
-    public void addFilesToArchive(String zipArchiveName, String... files) {
+    public void createZipArchive(final String zipArchiveName, final String comment, final String... fileName) {
         try {
-            makeNewArchiveWithParameters(new Special() {
-                @Override
-                public void doSpecial(ZipOutputStream zos, ZipFile zipArchiveFile, String... args) {
-                    zos.setComment(zipArchiveFile.getComment());
-                    for (String sFile: files) {
-                        File file = new File(sFile);
-                        if (file.exists())
-                            addElement(file, zos);
-                        else
-                            System.out.println("The file " + file.toString() + " does not exist. Check the correctness of input");
-                    }
-                }
-            }, zipArchiveName, files);
-
+            ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipArchiveName));
+            zos.setLevel(zipLevel);
+            zos.setComment(comment);
+            for (String sFile : fileName) {
+                addElement(new File(sFile), zos);
+            }
+            zos.close();
         } catch (IOException ioe){
-            System.out.println("Cannot find archive. Exception: " + ioe.toString());
-        } catch (Exception e){
-            System.out.println("Cannot perform action. Exception: " + e.toString());
+            ioe.printStackTrace();
         }
     }
 
     @Override
-    public void setCommentToArchive(String zipArchiveName, String comment) {
-        try {
-            makeNewArchiveWithParameters(new Special() {
-                @Override
-                public void doSpecial(ZipOutputStream zos, ZipFile zf, String... args) {
-                    zos.setComment(args[0]);
+    public void addFilesToArchive(final String zipArchiveName, final String... files) throws Exception {
+        makeNewArchiveWithParameters(new Special() {
+            @Override
+            public void doSpecial(ZipOutputStream zos, ZipFile zipArchiveFile, String... args) {
+                zos.setComment(zipArchiveFile.getComment());
+                for (String sFile : files) {
+                    File file = new File(sFile);
+                    if (file.exists())
+                        addElement(file, zos);
+                    else
+                        System.out.println("The file " + file.toString() + " does not exist. Check the correctness of input");
                 }
-            }, zipArchiveName, comment);
-        } catch (IOException ioe){
-            System.out.println("Cannot find archive. Exception: " + ioe.toString());
-        } catch (Exception e){
-            System.out.println("Cannot perform action. Exception: " + e.toString());
-        }
+            }
+        }, zipArchiveName, files);
+    }
+
+    @Override
+    public void setCommentToArchive(final String zipArchiveName, final String comment) throws Exception {
+        makeNewArchiveWithParameters(new Special() {
+            @Override
+            public void doSpecial(ZipOutputStream zos, ZipFile zf, String... args) {
+                zos.setComment(args[0]);
+            }
+        }, zipArchiveName, comment);
     }
 
 
     //This interface is used in methods where the existing archive has to be updated
     interface Special{
-        void doSpecial(ZipOutputStream zos, ZipFile zipArchiveFile, String... args);
+        void doSpecial(ZipOutputStream zos, ZipFile zipArchiveFile, final String... args);
     }
 
-    private void makeNewArchiveWithParameters(Special special, String zipArchiveName, String... args) throws Exception{
-        File zipArchive = new File(zipArchiveName);
-        ZipFile zipArchiveFile = new ZipFile(zipArchive);
-        File newArchive = new File("newArchive.zip");
-        ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(newArchive));
-        zos.setLevel(5);
+    private void makeNewArchiveWithParameters(Special special, final String zipArchiveName, final String... args) throws IllegalArgumentException {
+        try {
+            File zipArchive = new File(zipArchiveName);
+            ZipFile zipArchiveFile = new ZipFile(zipArchive);
+            File newArchive = new File(newArchiveName);
+            ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(newArchive));
+            zos.setLevel(zipLevel);
 
-        writeOldFilesIntoNewArchive(zipArchiveFile, zos);
-        special.doSpecial(zos, zipArchiveFile, args);
+            writeOldFilesIntoNewArchive(zipArchiveFile, zos);
+            special.doSpecial(zos, zipArchiveFile, args);
 
-        zipArchiveFile.close();
-        zos.close();
-        zipArchive.delete();
-        newArchive.renameTo(zipArchive);
+            zipArchiveFile.close();
+            zos.close();
+            zipArchive.delete();
+            newArchive.renameTo(zipArchive);
+        } catch (FileNotFoundException fnf){
+            fnf.printStackTrace();
+        }
+    }
+
+    private ZipFile makeZipArchiveFile(File zipArchive){
+        try {
+            ZipFile zipArchiveFile = new ZipFile(zipArchive);
+
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+        }
     }
 
 
     @Override
-    public void extractFromZipArchive(String zipArchiveName, String directory) throws IOException {
+    public void extractFromZipArchive(final String zipArchiveName, final String directory) throws IOException {
         File outputDirectory = new File(directory);
         extract(zipArchiveName, outputDirectory);
     }
 
     @Override
-    public void extractFromZipArchive(String zipArchiveName) throws IOException {
+    public void extractFromZipArchive(final String zipArchiveName) throws IOException {
         File outputDirectory = new File(zipArchiveName.replace(".zip", ""));
         extract(zipArchiveName, outputDirectory);
     }
 
-    private void extract(String zipArchiveName, File outputDirectory) throws IOException{
+    private void extract(final String zipArchiveName, File outputDirectory) throws IOException{
         outputDirectory.mkdir();
         ZipFile zipFile = new ZipFile(zipArchiveName);
 
@@ -112,7 +111,7 @@ public class ZipArchive implements Archive {
     }
 
     @Override
-    public String readCommentFromArchive(String zipArchiveName) {
+    public String readCommentFromArchive(final String zipArchiveName) {
         try {
             ZipFile zipFile = new ZipFile(zipArchiveName);
             String comment = zipFile.getComment();
