@@ -22,10 +22,10 @@ public class AddFilesTest {
         }
 
         //adding the file which is already in archive
-        try {
+  /*      try {
             arc.addFilesToArchive(args[0], args[1]);
         } catch (Exception e){
             e.printStackTrace();
-        }
+        } */
     }
 }

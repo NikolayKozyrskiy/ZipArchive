@@ -5,24 +5,23 @@ import java.io.File;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-public class UpdateArchive {
+class UpdateArchive {
     private String[] files;
     private String comment;
     private ZipOutputStream zos;
 
     UpdateArchive (ZipOutputStream zos, String... files){
         int sizeOfArray = files.length;
-        this.files = new String[sizeOfArray];
-        System.arraycopy(files, 0, this.files, 0, sizeOfArray);
+        if (sizeOfArray > 1) {
+            this.files = new String[sizeOfArray];
+            System.arraycopy(files, 0, this.files, 0, sizeOfArray);
+        }
+        else
+            comment = files[0];
         this.zos = zos;
     }
 
-    UpdateArchive (ZipOutputStream zos, String comment){
-        this.comment = comment;
-        this.zos = zos;
-    }
-
-    void update (ZipFile zipArchiveFile, ZipArchive archive){
+    void addFiles (ZipFile zipArchiveFile, ZipArchive archive){
         zos.setComment(zipArchiveFile.getComment());
         for (String sFile : files) {
             File file = new File(sFile);
@@ -33,7 +32,7 @@ public class UpdateArchive {
         }
     }
 
-    void update (){
+    void updateComment (){
         zos.setComment(comment);
     }
 }

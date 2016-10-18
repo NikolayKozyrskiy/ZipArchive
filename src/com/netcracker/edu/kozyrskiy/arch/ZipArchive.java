@@ -52,19 +52,18 @@ public class ZipArchive implements Archive {
 
             writeOldFilesIntoNewArchive(zos, zipArchiveFile);
 
-
+            UpdateArchive ua = new UpdateArchive(zos, args);
             if (args.length > 1) {
-                UpdateArchive ua = new UpdateArchive(zos, args);
-                ua.update(zipArchiveFile, this);
+                ua.addFiles(zipArchiveFile, this);
             }
             else {
-                UpdateArchive ua = new UpdateArchive(zos, args[0]);
-                ua.update();
+                File test = new File(args[0]);
+                if (test.isFile() || test.isDirectory())
+                    ua.addFiles(zipArchiveFile, this);
+                else
+                    ua.updateComment();
             }
             close(zos, zipArchiveFile);
-
-
-
 
 
             if(!zipArchive.delete())
